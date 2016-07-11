@@ -18,8 +18,10 @@
         MGSwipeAnimation *swipeAnimation = [[MGSwipeAnimation alloc] init];
         swipeAnimation.duration = duration;
         [self showSwipe:MGSwipeDirectionRightToLeft animated:YES completion:nil];
-        [self setSwipeOffset:offset animation:swipeAnimation completion:^{
-            [weakSelf setSwipeOffset:0.0 animation:swipeAnimation completion:nil];
+        [self showSwipe:MGSwipeDirectionRightToLeft animated:YES completion:^(BOOL finished) {
+            if (finished) {
+                [weakSelf setSwipeOffset:0.0 animation:swipeAnimation completion:nil];
+            }
         }];
     });
 }
